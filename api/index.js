@@ -1,8 +1,7 @@
 const { createBareServer } = require('../dist/createServer');
 const BareServer = require('../dist/BareServer').default;
 
-const server = createBareServer({
-  directory: '/bare/',
+const server = createBareServer('/bare/', {
   logErrors: true,
   maintainer: 'Phucsk',
 });
