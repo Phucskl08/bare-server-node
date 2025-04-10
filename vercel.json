@@ -1,13 +1,14 @@
 {
-  "functions": {
-    "api/index.js": {
-      "runtime": "nodejs20"
+  "builds": [
+    {
+      "src": "BareServer.js",
+      "use": "@vercel/node"
     }
-  },
+  ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/api/index.js"
+      "dest": "BareServer.js"
     }
   ]
 }
