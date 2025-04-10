@@ -1,4 +1,4 @@
-const { createServer } = require('../createServer'); // hoặc đúng path file chính
+const createServer = require('../dist/createServer'); // hoặc đúng path file chính
 const BareServer = require('../dist/BareServer').default;
 
 const server = createServer({
