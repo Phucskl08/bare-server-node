@@ -1,16 +1,16 @@
-const { createBareServer } = require('@tomphttp/bare-server-node');
 const http = require('http');
+const BareServer = require('../dist/BareServer').default;
 
-const bare = createBareServer('/');
-
-const server = http.createServer((req, res) => {
-  bare(req, res);
+const server = new BareServer('/bare/', {
+  maintainer: 'mày',
+  logErrors: true
 });
 
-server.on('upgrade', (req, socket, head) => {
-  bare.handleUpgrade(req, socket, head);
+// test route
+server.routes.set('/ping', async (req, res) => {
+  return new Response('pong', { status: 200 });
 });
 
 module.exports = (req, res) => {
-  server.emit('request', req, res);
+  server.routeRequest(req, res);
 };
