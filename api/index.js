@@ -1,16 +1,16 @@
-const http = require('http');
+const { createServer } = require('../createServer'); // hoặc đúng path file chính
 const BareServer = require('../dist/BareServer').default;
 
-const server = new BareServer('/bare/', {
-  maintainer: 'mày',
-  logErrors: true
+const server = createServer({
+  directory: '/bare/',
+  logErrors: true,
+  maintainer: 'Phucsk',
 });
 
-// test route
 server.routes.set('/ping', async (req, res) => {
   return new Response('pong', { status: 200 });
 });
 
-module.exports = (req, res) => {
-  server.routeRequest(req, res);
+module.exports = async (req, res) => {
+  await server.routeRequest(req, res);
 };
