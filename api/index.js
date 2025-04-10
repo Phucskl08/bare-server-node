@@ -1,8 +1,7 @@
-const path = require('path');
-const createServer = require(path.join(__dirname, '../dist/createServer'));
-const BareServer = require(path.join(__dirname, '../dist/BareServer')).default;
+const { createBareServer } = require('../dist/createServer');
+const BareServer = require('../dist/BareServer').default;
 
-const server = createServer({
+const server = createBareServer({
   directory: '/bare/',
   logErrors: true,
   maintainer: 'Phucsk',
@@ -13,11 +12,5 @@ server.routes.set('/ping', async (req, res) => {
 });
 
 module.exports = async (req, res) => {
-  try {
-    await server.routeRequest(req, res);
-  } catch (err) {
-    console.error('Route error:', err);
-    res.statusCode = 500;
-    res.end('Internal Server Error');
-  }
+  await server.routeRequest(req, res);
 };
